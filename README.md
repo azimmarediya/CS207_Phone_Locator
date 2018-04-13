@@ -1,4 +1,5 @@
 # CS207_Phone_Locator_And_Email_Using_Blynk
+--------------------------------------------
 
 The point of this repository is to explain how phone locator works and how to send email using Blynk. 
 
@@ -6,28 +7,35 @@ The project works really simply, whenever the user presses a button, The Arduino
 
 **********************************************************************************************************************
 This Picture is the set-up of Phone Locator and email using blynk:
-
-
-
+----------------------------------------------------------------
 
 
 
 
 
 Repository Contents
--------------------
+--------------------
 Here is my introduction  of this repository:
 
 /src - All the software programs (.ino, C++, .java)
+
 /hardware -  all 3D and other desgin model.
+
 /build - Files which are good to run.
+
 /libraries - libraries which are required in this program.
+
 /examples - Example files.
+
 /img - In this the image are stored. 
+
 /LICENSE - The license file.
+
 /README.md - The cuurent file.
+
 ***********************************************************************************************************************
-Materials Required 
+Materials Required
+-------------------
 
 The following materials are required:
 
