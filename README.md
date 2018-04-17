@@ -13,6 +13,7 @@ This Picture is the set-up of Phone Locator and email using blynk:
 
 
 
+![df_schem](https://user-images.githubusercontent.com/37346950/38888536-27bc5b24-4239-11e8-9809-7a40fa1485b8.jpg)
 
 
 
@@ -92,6 +93,20 @@ Set-up
 2) create new project name as "Phone Locator".
 
 ![png image](https://user-images.githubusercontent.com/37346950/38886545-7f6fc104-4233-11e8-83f2-5681580f18ae.png)
+
+
+
+
+
+When button is pressed -----> Get the location 
+      
+                                     |
+                                     | 
+                                     |
+                                     V
+Send message and Email <------  Process the Data
+
+
 
 
 
