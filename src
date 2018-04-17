@@ -1,1 +1,146 @@
+#define BLYNK_PRINT SwSerial
 
+// Universum | Universum Projects > PhoneLocator
+
+
+ #define BLYNK_MAX_SENDBYTES 128
+
+#include <SoftwareSerial.h>
+SoftwareSerial SwSerial(10, 11); // RX, TX
+    
+#include <BlynkSimpleStream.h>
+
+char auth[] = "insert token ";   
+char userEmail[] = "email@.com";            
+float latitude;
+float longitude;
+double altitude;
+double speed;
+
+int i;
+int proDebug = 1; 
+int buttonPin = 2;
+
+BLYNK_WRITE(V0) // read virtual pin 0 for co-ordinates
+{
+  latitude = param[0].asDouble();
+  longitude = param[1].asDouble();
+  altitude = param[2].asDouble();
+  speed = param[3].asDouble();
+}
+
+
+
+
+void getLocation()
+{
+  if(digitalRead(buttonPin) == HIGH)
+  {
+    if(proDebug == 1)
+    {
+      Serial.println("button pressed");
+      Serial.println("Locating Phone");
+      Serial.println("");
+    }
+  }
+  
+  if(i < 10) // if requested co-ordinates less than 10 times
+  
+    {
+      if(latitude != 0.00 && longitude != 0.00) // if co-ordinates are valid
+      {
+        //String toSend is the string that will be sent as the emails body
+        String toSend = "Phone Located! \n received co-ordinates \n LAT ";
+        toSend += latitude; // add vaiables to string
+        toSend += " LNG ";
+        toSend += longitude;
+        toSend += ". View location on Maps: ";
+        toSend += "www.google.com/maps/?q=";
+        toSend += latitude;
+        toSend += ",";
+        toSend += longitude;
+        delay(500);
+
+        if(proDebug == 1)
+        {
+          Serial.println("Phone geolocation found");
+          Serial.println("Sending Email...");
+          Serial.println(toSend);
+        }
+      
+        Blynk.email("azim.marediya786@gmail.com", "PhoneLocator | Notification", toSend); // send email
+
+        if(proDebug == 1)
+        {
+          Serial.println("Success");
+          Serial.println("Email Sent");
+          Serial.println("Restarting Protocol");
+          Serial.println("");
+        } 
+      
+        delay(5000);
+        i = 0;
+      }
+      else
+      {
+        if(i > 9)
+        {
+          if(proDebug == 1)
+          {
+            Serial.println("Error - Timeout Occured in Communication");
+            delay(500);
+            Serial.println("Restarting");
+          }
+    
+          i = 0;
+          delay(1000);
+        }
+        else if(i < 9)
+        {
+          i++;
+          delay(1000);
+          if(proDebug == 1)
+          {
+            Serial.println("Geolocation not Received");
+            Serial.println("Blynk responded with");
+            Serial.println(latitude);
+            Serial.println(longitude);
+            Serial.println("");
+          }
+        }
+      }
+    }
+  }
+  
+
+
+
+
+
+void setup()
+{
+  pinMode(buttonPin, INPUT);
+  Blynk.begin(Serial, auth); // initialise Blynk
+  delay(1000);
+  Blynk.email("azim.marediya786@gmail.com", "PhoneLocator | Notification", "Project Online"); // send email
+
+  if(proDebug == 1)
+  {
+    Serial.begin(9600);
+    while(!Serial) {};
+    delay(1000);
+    Serial.println("phoneLocator Online");
+    Serial.println("");
+    Serial.println("For this project to work, ensure that");
+    Serial.println("  Phone is connected to WiFi or Mobile Data");
+    Serial.println("");
+    Serial.println("");
+    delay(500);
+  }
+}
+
+void loop()
+{
+  Blynk.run();
+  getLocation();
+}
