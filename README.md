@@ -96,6 +96,9 @@ Set-up
 
 
 
+![2018-04-17-photo-00000377](https://user-images.githubusercontent.com/37346950/38888999-8870adfc-423a-11e8-9ef8-1b7293098b00.jpg)
+
+
 
 
 When button is pressed -----> Get the location 
@@ -111,6 +114,15 @@ Send message and Email <------  Process the Data
 
 
 
+
+
+1) if(button is pressed) will check if the button connected to pin 2 is pressed
+
+2)getLocation will request the phone's location from Blynk
+
+3)Process Data will process the received co-ordinates into the body of the email
+
+4) Send email will send the email to the user
 
 
 Credits
